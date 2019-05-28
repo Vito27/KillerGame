@@ -17,20 +17,15 @@ public class Player {
     public int getFirstScore() { return firstScore; }
 
 
-    public int getNowScore() {
-        return nowScore;
-    }
+    public int getNowScore() { return nowScore; }
 
     public int getLife() { return life; }
 
-    public void setNowScore(int nowScore) {
-        this.nowScore = nowScore;
-    }
+    public void setNowScore(int nowScore) { this.nowScore = nowScore; }
 
     public void removeOneLife(){
         if(life != 0){
             life--;
         }
     }
-
 }
