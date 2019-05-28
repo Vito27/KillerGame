@@ -10,12 +10,9 @@ public class Player {
         this.firstScore = firstScore;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public int getFirstScore() { return firstScore; }
-
 
     public int getNowScore() { return nowScore; }
 
