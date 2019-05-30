@@ -6,22 +6,22 @@ import java.util.ArrayList;
 public class KillerGame {
     private static boolean endOfGame = false;
     private int playersAmount;
-    private ArrayList<Player> playersList = new ArrayList<>();
+    private List<Player> playersList = new ArrayList<>();
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static void main (String[] args) throws Exception {
         KillerGame killerGame = new KillerGame();
-        killerGame.HowManyPlayer();
-        killerGame.PlayerInitialization();
+        killerGame.howManyPlayer();
+        killerGame.playerInitialization();
         while (!endOfGame){
-            killerGame.PlayersStrikes();
-            killerGame.CheckStrikeGoal();
-            killerGame.RemoveLosers();
-            killerGame.Winner();
-            killerGame.PlayersAfterRound();
+            killerGame.playersStrikes();
+            killerGame.checkStrikeGoal();
+            killerGame.removeLosers();
+            killerGame.winner();
+            killerGame.playersAfterRound();
         }
     }
 
-    private void HowManyPlayer() throws Exception {
+    private void howManyPlayer() throws Exception {
         do {
             System.out.print("Введите количество игроков (от 2 до 10): ");
             playersAmount = Integer.parseInt(reader.readLine());
@@ -31,7 +31,7 @@ public class KillerGame {
         }
         while (!(playersAmount > 1 && playersAmount <= 10));
     }
-    private boolean CheckName (String name){
+    private boolean checkName (String name){
         if(playersList.size() != 0) {
             for (int i = 0; i < playersList.size(); i++) {
                 String playerName = playersList.get(i).getName();
@@ -42,7 +42,7 @@ public class KillerGame {
         }
         return false;
     }
-    private boolean CheckFirstScore (int score){
+    private boolean checkFirstScore (int score){
         if(playersList.size() != 0) {
             for (int i = 0; i < playersList.size(); i++) {
                 int playerFirstScore = playersList.get(i).getFirstScore();
@@ -53,20 +53,20 @@ public class KillerGame {
         }
         return false;
     }
-    private void PlayerInitialization() throws Exception {
+    private void playerInitialization() throws Exception {
         for (int i = 0; i < playersAmount; i++) {
             String playerName;
             int firstScore;
             System.out.print("Игрок " + (1+i) + " введите имя: ");
             playerName = reader.readLine();
-            while(CheckName(playerName)) {
+            while(checkName(playerName)) {
                 System.out.println("К сожелению такое имя уже существует, придумайте новое.");
                 System.out.print("Введите имя снова: ");
                 playerName = reader.readLine();
             }
             System.out.print("Введите ваше первое попадание: ");
             firstScore = Integer.parseInt(reader.readLine());
-            while (CheckFirstScore(firstScore))
+            while (checkFirstScore(firstScore))
             {
                 System.out.println("К сожелению такоей результат уже существует, бросьте еще раз.");
                 System.out.print("Введите результат снова: ");
@@ -75,7 +75,7 @@ public class KillerGame {
             playersList.add(new Player(playerName,firstScore));
         }
     }
-    private void PlayersStrikes() throws Exception{
+    private void playersStrikes() throws Exception{
         for(int i = 0; i < playersList.size(); i++) {
             Player player = playersList.get(i);
             int nowScore;
@@ -93,7 +93,7 @@ public class KillerGame {
             while (!(isCorrect.equals("y") || isCorrect.equals("Y") || isCorrect.equals("н") || isCorrect.equals("Н")));
         }
     }
-    private void CheckStrikeGoal(){
+    private void checkStrikeGoal(){
         for (int i = 0; i < playersList.size(); i++){
             Player player = playersList.get(i);
             for(int j = 0; j < playersList.size(); j++) {
@@ -104,7 +104,7 @@ public class KillerGame {
             }
         }
     }
-    public void RemoveLosers(){
+    public void removeLosers(){
         for (int i = 0; i < playersList.size(); i++){
             Player player = playersList.get(i);
             if(player.getLife() == 0)
@@ -114,7 +114,7 @@ public class KillerGame {
             }
         }
     }
-    private void Winner(){
+    private void winner(){
         if(playersList.size() == 1){
             System.out.println("Поздравляем вас " + playersList.get(0).getName() + " вы победили!");
             endOfGame = true;
@@ -125,7 +125,7 @@ public class KillerGame {
             endOfGame = true;
         }
     }
-    private void PlayersAfterRound(){
+    private void playersAfterRound(){
         if(playersList.size() > 1){
             for (Player player: playersList
                  ) {
